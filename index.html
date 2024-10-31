@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From my side</title>
+    <title>AR Text Display</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
 
@@ -15,49 +15,33 @@
 <body>
     <div id="container">
         <a-scene embedded arjs>
+            <a-entity camera look-controls></a-entity>
+
+            <!-- Always visible text entity -->
             <a-entity 
                 id="happy-diwali-text"
                 text="value: Happy Diwali; color: red; align: center; width: 6;" 
-                position="0 1 -5" 
+                position="0 2 -5" <!-- Position where the text will appear -->
                 scale="2 2 1" 
                 text-shadow="enabled: true; color: black; opacity: 0.5" 
-                visible="false"> <!-- Ensure it is hidden initially -->
+                visible="true"> <!-- Make it always visible -->
             </a-entity>
-            
-            <!-- Optional: Add a background for contrast -->
-            <a-plane position="0 1 -5.1" rotation="-90 0 0" width="6" height="2" color="#000" opacity="0.5"></a-plane>
+
+            <!-- Optional: Add a plane for background contrast -->
+            <a-plane position="0 1 -6" rotation="-90 0 0" width="6" height="2" color="#000" opacity="0.5" visible="true"></a-plane>
         </a-scene>
     </div>
 
     <script>
-        AFRAME.registerComponent('show-text-on-sky', {
-            init: function() {
-                this.textEntity = document.getElementById('happy-diwali-text');
-                this.checkSky(); // Initial check to set visibility
-            },
+        // This can be removed as we are keeping the text always visible
+        // AFRAME.registerComponent('show-text-on-sky', {
+        //     init: function() {
+        //         this.textEntity = document.getElementById('happy-diwali-text');
+        //         this.textEntity.setAttribute('visible', 'true'); // Ensure it's visible
+        //     }
+        // });
 
-            tick: function(){
-                this.checkSky();
-            },
-
-            checkSky: function() {
-                const camera = this.el.sceneEl.camera;
-                const direction  = new THREE.Vector3();
-                camera.getWorldDirection(direction);
-
-                const angle = direction.y;
-                console.log("Camera direction Y:", angle); // Log the angle for debugging
-                
-                // Adjust the threshold for showing the text
-                if(angle > 0.5) {
-                    this.textEntity.setAttribute('visible', 'true');
-                } else {
-                    this.textEntity.setAttribute('visible', 'false');
-                }
-            }
-        });
-
-        document.querySelector('a-scene').setAttribute('show-text-on-sky', '');
+        // document.querySelector('a-scene').setAttribute('show-text-on-sky', '');
     </script>
 </body>
 </html>
