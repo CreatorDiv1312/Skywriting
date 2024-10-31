@@ -17,15 +17,15 @@
         <a-scene embedded arjs>
             <a-entity 
                 id="happy-diwali-text"
-                text="value: Happy Diwali; color: red; align: center; width: 6;" 
-                position="0 1 -5" 
+                text="value: Happy Diwali; color: red; align: center; width: 6;"
+                position="0 2 -5"  
                 scale="2 2 1" 
                 text-shadow="enabled: true; color: black; opacity: 0.5" 
-                visible="false"> <!-- Ensure it is hidden initially -->
+                visible="false"><!--Adjusting y positon--> <!-- Ensure it is hidden initially -->
             </a-entity>
             
-            <!-- Optional: Add a background for contrast -->
-            <a-plane position="0 1 -5.1" rotation="-90 0 0" width="6" height="2" color="#000" opacity="0.5"></a-plane>
+            <!-- Make sure the plane is visible and positioned correctly -->
+            <a-plane position="0 2 -4" rotation="-90 0 0" width="6" height="2" color="#000" opacity="0.5" visible="true"></a-plane>
         </a-scene>
     </div>
 
